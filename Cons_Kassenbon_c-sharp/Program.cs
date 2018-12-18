@@ -39,7 +39,7 @@ namespace Cons_Kassenbon_c_sharp
 					}
 					Console.WriteLine("Bitte Menge eingeben:");
 					eingabe = Console.ReadLine();
-					if (!int.TryParse(eingabe, out menge[i]));
+					if (!int.TryParse(eingabe, out menge[i]))
 					{
 						Console.WriteLine("Falscher Preis!");
 						menge[i] = 0;
@@ -50,13 +50,15 @@ namespace Cons_Kassenbon_c_sharp
 
 				//Ausgabe
 
-				Console.WriteLine("********************************");
-				Console.WriteLine("+++++++++++KASSENBON++++++++++++");
+				Console.WriteLine("**************************************************************************");
+				Console.WriteLine("++++++++++++++++++++++++++++++++KASSENBON+++++++++++++++++++++++++++++++++");
 				for (int i = 0; i < anzahl; i++)
 				{
-					Console.WriteLine("Artikel: " + artikel[i]+ "    " + "Preis: " + preis[i] +"€");
+					Console.WriteLine("Artikel: " + artikel[i]+ "    " + "Preis: " +
+					preis[i] +",-  " + "  Menge: "+ menge[i] +"St.   " + "   Pos Gesamt: " +
+					positionspreis(menge[i], preis[i]));
 				}
-				Console.WriteLine("********************************");
+				Console.WriteLine("**************************************************************************");
 			}
 			else
 			{
@@ -64,6 +66,11 @@ namespace Cons_Kassenbon_c_sharp
 			}
 		Console.ReadKey();
 
+		}
+
+		static double positionspreis(int menge, double preis)
+		{
+			return menge * preis;
 		}
 	}
 }
