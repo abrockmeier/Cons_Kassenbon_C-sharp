@@ -16,7 +16,7 @@ namespace Cons_Kassenbon_c_sharp
 		double[] preis;
 		int[] menge;
 
-		Console.WriteLine("Wie viele Artikel sollen erfasst werden=");
+		Console.WriteLine("Wie viele Artikel sollen erfasst werden");
 		eingabe = Console.ReadLine();
 			if (int.TryParse(eingabe, out anzahl))
 			{
@@ -49,7 +49,7 @@ namespace Cons_Kassenbon_c_sharp
 				//
 
 				//Ausgabe
-
+				// --> Doppelt gemoppelt!  double summe = 0.0;
 				Console.WriteLine("**************************************************************************");
 				Console.WriteLine("++++++++++++++++++++++++++++++++KASSENBON+++++++++++++++++++++++++++++++++");
 				for (int i = 0; i < anzahl; i++)
@@ -57,7 +57,20 @@ namespace Cons_Kassenbon_c_sharp
 					Console.WriteLine("Artikel: " + artikel[i]+ "    " + "Preis: " +
 					preis[i] +",-  " + "  Menge: "+ menge[i] +"St.   " + "   Pos Gesamt: " +
 					positionspreis(menge[i], preis[i]));
+					// --> Doppelt gemoppelt! summe += positionspreis(menge[i], preis[i]); 
+					Console.WriteLine("==========================================================================");
+					
 				}
+				// --> Doppelt gemoppelt!  Console.WriteLine("Summe der Pos-Preise: {0}", summe);
+				
+				int art = artikelgesamt(menge, anzahl);
+				Console.WriteLine("Artikelgesamt: {0}", art);
+
+				double brutto = gesamtBrutto(anzahl, menge, preis);
+				Console.WriteLine("Gesamtsumme (Brutto): {0}", brutto);
+
+				double netto = gesamtBrutto(anzahl, menge, preis) *1.19;
+				Console.WriteLine("Gesamtsumme (Netto): {0}", netto);
 				Console.WriteLine("**************************************************************************");
 			}
 			else
@@ -68,9 +81,32 @@ namespace Cons_Kassenbon_c_sharp
 
 		}
 
+		
+
 		static double positionspreis(int menge, double preis)
 		{
 			return menge * preis;
 		}
+
+		static int artikelgesamt (int[] menge,int anzahl)
+		{
+			int summe= 0;
+			for (int j = 0; j < anzahl; j++)
+			{
+				summe = summe + menge[j];
+			}
+		return summe;
+		}
+		static double gesamtBrutto (int anzahl, int[] menge, double[] preis)
+		{
+		double sumBrutto = 0.0;
+			for (int i = 0; i < anzahl; i++)
+			{
+				
+				sumBrutto = sumBrutto +  positionspreis(menge[i], preis[i]) ;
+			}
+		return sumBrutto;
+		}
+
 	}
 }
